@@ -1,0 +1,26 @@
+{
+  "name": "lab5",
+  "version": "1.0.0",
+  "description": "lab 5",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BYUCS260/lab-5-mongodb-chantelprows.git"
+  },
+  "author": "Chantel Prows",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BYUCS260/lab-5-mongodb-chantelprows/issues"
+  },
+  "homepage": "https://github.com/BYUCS260/lab-5-mongodb-chantelprows#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.3.4",
+    "mongoose": "^5.7.10",
+    "multer": "^1.4.2"
+  }
+}
