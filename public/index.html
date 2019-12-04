@@ -16,25 +16,37 @@
     </div>
   </div>
   <div id="app" style="padding-left: 30px; padding-top: 30px;">
-    
+
     <input v-model="author" placeholder="Name">
     <br><br>
     <div style="display: flex;">
       <input type="textarea" v-model="text" placeholder="Type your thoughts...">
       <button @click="add" style="cursor: pointer"> Post </button>
     </div>
-    
+
+    <br><br>
+
     <section>
       <div v-for="item in items">
         <div>
-          <h2>{{item.author}}</h2>
+          <div style="display: flex;">
+            <h2 style="font-weight: bolder;">{{item.author}}</h2>
+            <div style="margin-top: 13px; font-weight: bold;"> &nbsp; says </div>
+          </div>
           <h4 style="margin-left: 30px;">{{item.text}}</h4>
-          <div style="margin-left: 30px;">{{item.upvotes}}</div>
+          <div style="display: flex;">
+            <div style="margin-left: 30px; margin-top: 10px;">Votes:</div>
+            <div style="margin-left: 10px; margin-top: 10px; font-weight: bolder;" :style="color(item)">{{item.upvotes}}</div>
+            <div style="margin-left: 10px;">
+              <div style="cursor: pointer;" @click="upVote(item)">&#x25B2;</div>
+              <div style="cursor: pointer;" @click="downVote(item)">&#x25BC;</div>
+            </div>
+          </div>
         </div>
         <br>
       </div>
     </section>
-  
+
   </div>
 
 

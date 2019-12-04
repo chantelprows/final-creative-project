@@ -11,7 +11,7 @@ app.use(express.static('public'));
 
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/amazon', {
+mongoose.connect('mongodb://localhost:27017/status', {
     useNewUrlParser: true
 });
 
@@ -59,6 +59,32 @@ app.put('/api/submit', async(req, res) => {
             await item.save()
         }
         res.send(items);
+    }
+    catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+});
+
+app.put('/api/upvote', async(req, res) => {
+    try {
+        let item = await Item.findOne({ author: req.body.author, text: req.body.text });
+        item.upvotes = item.upvotes + 1
+        await item.save()
+        res.send(item);
+    }
+    catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+});
+
+app.put('/api/downvote', async(req, res) => {
+    try {
+        let item = await Item.findOne({ author: req.body.author, text: req.body.text });
+        item.upvotes = item.upvotes - 1
+        await item.save()
+        res.send(item);
     }
     catch (error) {
         console.log(error);

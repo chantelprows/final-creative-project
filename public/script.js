@@ -7,10 +7,18 @@ var app = new Vue({
     selected: {}
   },
   methods: {
+    color(item) {
+      if (item.upvotes > 0) {
+        return "color: green"
+      }
+      else {
+        return "color: red"
+      }
+    },
     async getItems() {
       try {
         let response = await axios.get("/api/items")
-        this.items = response.data
+        this.items = response.data.reverse()
         return true
       }
       catch (error) {
@@ -34,18 +42,6 @@ var app = new Vue({
     async submit() {
       try {
         let response = await axios.put("/api/submit", {
-          items: this.checkedItems
-        })
-        this.checkedItems = []
-        return true
-      }
-      catch (error) {
-        console.log(error)
-      }
-    },
-    async submit() {
-      try {
-        let response = await axios.put("/api/submit", {
           author: this.selected.author,
           text: this.selected.text
         })
@@ -53,6 +49,32 @@ var app = new Vue({
       }
       catch (error) {
         console.log(error)
+      }
+    },
+    async upVote(item) {
+      try {
+        let response = await axios.put("/api/upvote", {
+          author: item.author,
+          text: item.text
+        });
+        this.getItems();
+        return true;
+      }
+      catch (error) {
+        console.log(error);
+      }
+    },
+    async downVote(item) {
+      try {
+        let response = await axios.put("/api/downvote", {
+          author: item.author,
+          text: item.text
+        });
+        this.getItems();
+        return true;
+      }
+      catch (error) {
+        console.log(error);
       }
     }
   },
